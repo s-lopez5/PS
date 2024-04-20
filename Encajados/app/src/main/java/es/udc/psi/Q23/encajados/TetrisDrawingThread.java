@@ -11,7 +11,7 @@ public class TetrisDrawingThread extends Thread {
     private TetrisGame tetrisGame;
     private boolean running;
     private Canvas canvas;
-    private long targetFPS = 10; // Objetivo de fotogramas por segundo
+    private long targetFPS = 5; // Objetivo de fotogramas por segundo
     private long frameTimeMillis = 1000 / targetFPS;
 
     public TetrisDrawingThread(SurfaceHolder surfaceHolder, TetrisGame tetrisGame) {
@@ -73,7 +73,7 @@ public class TetrisDrawingThread extends Thread {
             for (int j = 0; j < 23; j++) {
                 int color = well[i][j];
                 if (color != Color.BLACK) {
-                    // Dibuja un cuadrado con el color del tetramino en la posición (i, j)
+                    // Dibuja un rectángulo con el color del tetramino en la posición (i, j)
                     Paint paint = new Paint();
                     paint.setColor(color);
                     canvas.drawRect(i * blockSize, j * blockSize,
@@ -91,10 +91,11 @@ public class TetrisDrawingThread extends Thread {
             int color = TetrisGame.tetraminoColors[currentPiece];
             Paint paint = new Paint();
             paint.setColor(color);
-            canvas.drawRect((p.x + pieceOrigin.x) * blockSize,
-                    (p.y + pieceOrigin.y) * blockSize,
-                    (p.x + pieceOrigin.x + 1) * blockSize,
-                    (p.y + pieceOrigin.y + 1) * blockSize, paint);
+            // Ajusta las coordenadas de dibujo para la posición de la pieza actual
+            int x = (p.x + pieceOrigin.x) * blockSize;
+            int y = (p.y + pieceOrigin.y) * blockSize;
+            // Dibuja un rectángulo para cada cuadrado del tetramino
+            canvas.drawRect(x, y, x + blockSize, y + blockSize, paint);
         }
     }
 

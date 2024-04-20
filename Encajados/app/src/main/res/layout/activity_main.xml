@@ -12,7 +12,8 @@
         android:id="@+id/tetrisView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2" />
+        android:layout_weight="2"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,39 +21,53 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
         <Button
             android:id="@+id/buttonRotateLeft"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="RLeft" />
 
         <Button
             android:id="@+id/buttonMoveLeft"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="MLeft" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/buttonDropDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Drop Down" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
         <Button
             android:id="@+id/buttonMoveRight"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="MRight" />
 
         <Button
             android:id="@+id/buttonRotateRight"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="RRight" />
+        </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonDropDown"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Drop Down" />
+
 
 </LinearLayout>

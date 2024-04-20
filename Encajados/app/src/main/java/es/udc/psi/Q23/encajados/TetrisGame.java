@@ -14,37 +14,58 @@ public class TetrisGame {
     public static final Point[][][] Tetraminos = {
             // I-Piece
             {
-                    new Point[]{new Point(0, 1)}, new Point[]{new Point(1, 1)}, new Point[]{new Point(2, 1)}, new Point[]{new Point(3, 1)}
+                    { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(3, 1) },
+                    { new Point(1, 0), new Point(1, 1), new Point(1, 2), new Point(1, 3) },
+                    { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(3, 1) },
+                    { new Point(1, 0), new Point(1, 1), new Point(1, 2), new Point(1, 3) }
             },
 
             // J-Piece
             {
-                    new Point[]{new Point(0, 1)}, new Point[]{new Point(1, 1)}, new Point[]{new Point(2, 1)}, new Point[]{new Point(2, 0)}
+                    { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(2, 0) },
+                    { new Point(1, 0), new Point(1, 1), new Point(1, 2), new Point(2, 2) },
+                    { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(0, 2) },
+                    { new Point(1, 0), new Point(1, 1), new Point(1, 2), new Point(0, 0) }
             },
 
             // L-Piece
             {
-                    new Point[]{new Point(0, 1)}, new Point[]{new Point(1, 1)}, new Point[]{new Point(2, 1)}, new Point[]{new Point(2, 2)}
+                    { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(2, 2) },
+                    { new Point(1, 0), new Point(1, 1), new Point(1, 2), new Point(0, 2) },
+                    { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(0, 0) },
+                    { new Point(1, 0), new Point(1, 1), new Point(1, 2), new Point(2, 0) }
             },
 
             // O-Piece
             {
-                    new Point[]{new Point(0, 0)}, new Point[]{new Point(0, 1)}, new Point[]{new Point(1, 0)}, new Point[]{new Point(1, 1)}
+                    { new Point(0, 0), new Point(0, 1), new Point(1, 0), new Point(1, 1) },
+                    { new Point(0, 0), new Point(0, 1), new Point(1, 0), new Point(1, 1) },
+                    { new Point(0, 0), new Point(0, 1), new Point(1, 0), new Point(1, 1) },
+                    { new Point(0, 0), new Point(0, 1), new Point(1, 0), new Point(1, 1) }
             },
 
             // S-Piece
             {
-                    new Point[]{new Point(1, 0)}, new Point[]{new Point(2, 0)}, new Point[]{new Point(0, 1)}, new Point[]{new Point(1, 1)}
+                    { new Point(1, 0), new Point(2, 0), new Point(0, 1), new Point(1, 1) },
+                    { new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(1, 2) },
+                    { new Point(1, 0), new Point(2, 0), new Point(0, 1), new Point(1, 1) },
+                    { new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(1, 2) }
             },
 
             // T-Piece
             {
-                    new Point[]{new Point(1, 0)}, new Point[]{new Point(0, 1)}, new Point[]{new Point(1, 1)}, new Point[]{new Point(2, 1)}
+                    { new Point(1, 0), new Point(0, 1), new Point(1, 1), new Point(2, 1) },
+                    { new Point(1, 0), new Point(0, 1), new Point(1, 1), new Point(1, 2) },
+                    { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(1, 2) },
+                    { new Point(1, 0), new Point(1, 1), new Point(2, 1), new Point(1, 2) }
             },
 
             // Z-Piece
             {
-                    new Point[]{new Point(0, 0)}, new Point[]{new Point(1, 0)}, new Point[]{new Point(1, 1)}, new Point[]{new Point(2, 1)}
+                    { new Point(0, 0), new Point(1, 0), new Point(1, 1), new Point(2, 1) },
+                    { new Point(1, 0), new Point(0, 1), new Point(1, 1), new Point(0, 2) },
+                    { new Point(0, 0), new Point(1, 0), new Point(1, 1), new Point(2, 1) },
+                    { new Point(1, 0), new Point(0, 1), new Point(1, 1), new Point(0, 2) }
             }
     };
 
@@ -123,7 +144,7 @@ public class TetrisGame {
 
     // Drops the piece one line or fixes it to the well if it can't drop
     public void dropDown() {
-        Log.d("_TAG", "Abajo ");
+
         if (!collidesAt(pieceOrigin.x, pieceOrigin.y + 1, rotation)) {
             pieceOrigin.y += 1;
         } else {
@@ -135,7 +156,13 @@ public class TetrisGame {
     public void fixToWell() {
         for (Point p : Tetraminos[currentPiece][rotation]) {
             well[pieceOrigin.x + p.x][pieceOrigin.y + p.y] = tetraminoColors[currentPiece];
+            if ((pieceOrigin.y == 2)&&(p.y ==0) ) {
+                //Añadir pantalla de derrota en este caso
+                init(); // Reiniciar el juego
+                return;
+            }
         }
+
         clearRows();
         newPiece();
     }
