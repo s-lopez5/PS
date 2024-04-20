@@ -20,10 +20,9 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         // Inicia el hilo de dibujo cuando el SurfaceView es creado
-        TetrisDrawingThread thread = new TetrisDrawingThread(getHolder(), tetrisGame);
-        thread.setRunning(true);
-        thread.start();
+
     }
+
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {

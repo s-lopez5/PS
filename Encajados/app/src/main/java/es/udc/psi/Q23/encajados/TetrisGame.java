@@ -2,7 +2,6 @@ package es.udc.psi.Q23.encajados;
 
 
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
 
