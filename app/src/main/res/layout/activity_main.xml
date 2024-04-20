@@ -55,4 +55,10 @@
         android:layout_height="wrap_content"
         android:text="Drop Down" />
 
+    <Button
+        android:id="@+id/button_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/but_salir" />
+
 </LinearLayout>
