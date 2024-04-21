@@ -19,29 +19,20 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        // Inicia el hilo de dibujo cuando el SurfaceView es creado
+        // Cuando el SurfaceView se crea
 
     }
 
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        // No se utiliza en este ejemplo
+        // Cuando el SurfaceView cambia
+
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        // Detiene el hilo de dibujo cuando el SurfaceView es destruido
-        boolean retry = true;
-        TetrisDrawingThread thread = null;
-        while (retry) {
-            try {
-                thread.setRunning(false);
-                thread.join();
-                retry = false;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        // Cuando el SurfaceView es destruido
+
     }
 }

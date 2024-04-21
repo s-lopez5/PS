@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:orientation="vertical"
@@ -31,44 +30,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RLeft" />
+            android:text="@string/but_rleft" />
 
         <Button
             android:id="@+id/buttonMoveLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="MLeft" />
+            android:text= "@string/but_mleft"/>
         </LinearLayout>
+
         <Button
             android:id="@+id/buttonDropDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Drop Down" />
+            android:text="@string/but_ddown" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-        <Button
-            android:id="@+id/buttonMoveRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="MRight" />
 
-        <Button
-            android:id="@+id/buttonRotateRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="RRight" />
+            <Button
+                android:id="@+id/buttonRotateRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/but_rright" />
+            <Button
+                android:id="@+id/buttonMoveRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/but_mright" />
+
         </LinearLayout>
     </LinearLayout>
-
-
 
     <Button
         android:id="@+id/button_exit"

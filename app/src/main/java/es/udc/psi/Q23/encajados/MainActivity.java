@@ -8,12 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TetrisGame tetrisGame;
     private TetrisDrawingThread tetrisThread;
 
     private TetrisView tetrisView;
+    Button butRL, butML, butRR, butMR, butDD, butExit ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,61 +30,51 @@ public class MainActivity extends AppCompatActivity {
         tetrisThread.start();
 
         // Botón para rotar la pieza hacia la izquierda
-        Button buttonRotateLeft = findViewById(R.id.buttonRotateLeft);
-        buttonRotateLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tetrisGame.rotate(-1);
-            }
-        });
+        butRL = findViewById(R.id.buttonRotateLeft);
+        butRL.setOnClickListener(this);
 
         // Botón para rotar la pieza hacia la derecha
-        Button buttonRotateRight = findViewById(R.id.buttonRotateRight);
-        buttonRotateRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tetrisGame.rotate(1);
-            }
-        });
+        butRR = findViewById(R.id.buttonRotateRight);
+        butRR.setOnClickListener(this);
 
         // Botón para mover la pieza hacia la izquierda
-        Button buttonMoveLeft = findViewById(R.id.buttonMoveLeft);
-        buttonMoveLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tetrisGame.move(-1);
-            }
-        });
+        butML = findViewById(R.id.buttonMoveLeft);
+        butML.setOnClickListener(this);
 
         // Botón para mover la pieza hacia la derecha
-        Button buttonMoveRight = findViewById(R.id.buttonMoveRight);
-        buttonMoveRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tetrisGame.move(1);
-            }
-        });
+        butMR = findViewById(R.id.buttonMoveRight);
+        butMR.setOnClickListener(this);
 
         // Botón para hacer caer la pieza
-        Button buttonDropDown = findViewById(R.id.buttonDropDown);
-        buttonDropDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tetrisGame.dropDown();
-            }
-        });
+        butDD = findViewById(R.id.buttonDropDown);
+        butDD.setOnClickListener(this);
 
-        Button button_exit = findViewById(R.id.button_exit);
-        buttonDropDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("_TAG", "Boton exit");
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
+        // Botón para cerrar la partida
+        butExit = findViewById(R.id.button_exit);
+        butExit.setOnClickListener(this);
+
+
     }
+    @Override
+    public void onClick(View v) {
+        if(v==butRL){
+            tetrisGame.rotate(-1);
+        }else if(v==butRR) {
+            tetrisGame.rotate(1);
+        }else if(v==butML) {
+            tetrisGame.move(-1);
+        }else if(v==butMR) {
+            tetrisGame.move(1);
+        }else if(v==butDD) {
+            tetrisGame.dropDown();
+        }else if(v==butExit) {
+            Log.d("_TAG", "Boton exit");
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+    }
+
 
     @Override
     protected void onDestroy() {

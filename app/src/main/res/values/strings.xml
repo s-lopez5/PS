@@ -3,4 +3,9 @@
     <string name="but_ini">Iniciar</string>
     <string name="but_punt">Puntuacion</string>
     <string name="but_salir">Salir</string>
+    <string name="but_rleft">RLeft</string>
+    <string name="but_mleft">MLeft</string>
+    <string name="but_ddown">Drop Down</string>
+    <string name="but_rright">RRight</string>
+    <string name="but_mright">MRight</string>
 </resources>
