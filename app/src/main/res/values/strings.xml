@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Encajados</string>
-    <string name="but_ini">Iniciar</string>
-    <string name="but_punt">Puntuacion</string>
-    <string name="but_salir">Salir</string>
+    <string name="but_ini">Start</string>
+    <string name="but_punt">Score</string>
+    <string name="but_salir">Exit</string>
     <string name="but_rleft">RLeft</string>
     <string name="but_mleft">MLeft</string>
     <string name="but_ddown">Drop Down</string>
     <string name="but_rright">RRight</string>
     <string name="but_mright">MRight</string>
-    <string name="but_pausar">Pausar</string>
+    <string name="but_pausar">Pause</string>
 </resources>

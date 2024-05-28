@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Encajados</string>
+    <string name="but_ini">Commencer</string>
+    <string name="but_punt">Ponctuation</string>
+    <string name="but_salir">Sortie</string>
+    <string name="but_rleft">RGauche</string>
+    <string name="but_mleft">MGauche</string>
+    <string name="but_ddown">Dérouler</string>
+    <string name="but_rright">RDroite</string>
+    <string name="but_mright">MDroite</string>
+    <string name="but_pausar">Pause</string>
+</resources>
