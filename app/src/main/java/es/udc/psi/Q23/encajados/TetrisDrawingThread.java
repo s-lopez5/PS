@@ -1,10 +1,14 @@
 package es.udc.psi.Q23.encajados;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.view.SurfaceHolder;
+import android.widget.Toast;
 
 public class TetrisDrawingThread extends Thread{
     private final SurfaceHolder surfaceHolder;
@@ -30,6 +34,9 @@ public class TetrisDrawingThread extends Thread{
 
         while (running) {
             startTime = System.currentTimeMillis();
+            if (tetrisGame.isPaused()) {
+                continue;
+            }
             canvas = null;
 
             try {
@@ -67,6 +74,12 @@ public class TetrisDrawingThread extends Thread{
         // Obtiene el tamaño del bloque
         int blockSize = Math.min(canvas.getWidth() / 12, canvas.getHeight() / 23);
 
+        // Calcula los márgenes para centrar el campo de juego
+        int totalFieldWidth = 12 * blockSize;
+        int totalFieldHeight = 23 * blockSize;
+        int marginLeft = (canvas.getWidth() - totalFieldWidth) / 2;
+        int marginTop = (canvas.getHeight() - totalFieldHeight) / 2;
+
         // Dibuja el campo de juego
         int[][] well = tetrisGame.getWell();
         for (int i = 0; i < 12; i++) {
@@ -76,8 +89,8 @@ public class TetrisDrawingThread extends Thread{
                     // Dibuja un rectángulo con el color del tetramino en la posición (i, j)
                     Paint paint = new Paint();
                     paint.setColor(color);
-                    canvas.drawRect(i * blockSize, j * blockSize,
-                            (i + 1) * blockSize, (j + 1) * blockSize, paint);
+                    canvas.drawRect(marginLeft + i * blockSize, marginTop + j * blockSize,
+                            marginLeft + (i + 1) * blockSize, marginTop + (j + 1) * blockSize, paint);
                 }
             }
         }
@@ -92,10 +105,18 @@ public class TetrisDrawingThread extends Thread{
             Paint paint = new Paint();
             paint.setColor(color);
             // Ajusta las coordenadas de dibujo para la posición de la pieza actual
-            int x = (p.x + pieceOrigin.x) * blockSize;
-            int y = (p.y + pieceOrigin.y) * blockSize;
+            int x = marginLeft + (p.x + pieceOrigin.x) * blockSize;
+            int y = marginTop + (p.y + pieceOrigin.y) * blockSize;
             // Dibuja un rectángulo para cada cuadrado del tetramino
             canvas.drawRect(x, y, x + blockSize, y + blockSize, paint);
         }
+
+        // Dibuja la puntuación en la parte superior de la pantalla
+        long score = tetrisGame.getScore();
+        Paint textPaint = new Paint();
+        textPaint.setColor(Color.WHITE);
+        textPaint.setTextSize(50); // tamaño texto
+        canvas.drawText("Score: \n", 10, 50, textPaint);
+        canvas.drawText(String.valueOf(score), 10, 110, textPaint);
     }
 }

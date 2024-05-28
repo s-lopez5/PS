@@ -1,8 +1,8 @@
 package es.udc.psi.Q23.encajados;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,13 +78,19 @@ public class TetrisGame {
 
     private long score;
     private int[][] well;
+    private boolean isPaused;
+    private boolean isOver;
 
-    public TetrisGame() {
+    private Context context;
+
+    public TetrisGame(Context context) {
+        this.context=context;
+
         init();
     }
 
     // Creates a border around the well and initializes the dropping piece
-    private void init() {
+    void init() {
         well = new int[12][24];
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 23; j++) {
@@ -122,8 +128,34 @@ public class TetrisGame {
         return false;
     }
 
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
+
+    public boolean isOver(){return isOver;}
+
+    public void setOver(boolean over) {
+        isPaused = true;
+        isOver = over;
+    }
+
+    public void retry(){
+        score=0;
+        setPaused(false);
+        init();
+    }
+
+    public void extraPoint(){
+        score+=10;
+    }
+
     // Rotate the piece clockwise or counterclockwise
     public void rotate(int i) {
+        if (isPaused) return;
         int newRotation = (rotation + i) % 4;
         if (newRotation < 0) {
             newRotation = 3;
@@ -135,6 +167,7 @@ public class TetrisGame {
 
     // Move the piece left or right
     public void move(int i) {
+        if (isPaused) return;
         if (!collidesAt(pieceOrigin.x + i, pieceOrigin.y, rotation)) {
             pieceOrigin.x += i;
         }
@@ -142,6 +175,7 @@ public class TetrisGame {
 
     // Drops the piece one line or fixes it to the well if it can't drop
     public void dropDown() {
+        if (isPaused) return;
 
         if (!collidesAt(pieceOrigin.x, pieceOrigin.y + 1, rotation)) {
             pieceOrigin.y += 1;
@@ -155,8 +189,10 @@ public class TetrisGame {
         for (Point p : Tetraminos[currentPiece][rotation]) {
             well[pieceOrigin.x + p.x][pieceOrigin.y + p.y] = tetraminoColors[currentPiece];
             if ((pieceOrigin.y == 2)&&(p.y ==0) ) {
-                //Añadir pantalla de derrota en este caso
-                init(); // Reiniciar el juego
+                setOver(true);
+                if (context instanceof MainActivity) {
+                    ((MainActivity) context).showGameOverDialog(score);
+                }
                 return;
             }
         }
@@ -173,7 +209,6 @@ public class TetrisGame {
         }
     }
 
-    // Clear completed rows from the field and award score according to the number of simultaneously cleared rows.
     public void clearRows() {
         boolean gap;
         int numClears = 0;
@@ -193,7 +228,7 @@ public class TetrisGame {
             }
         }
 
-        switch (numClears) {
+        switch (numClears) {//Añadir aqui envio de linea a rival
             case 1:
                 score += 100;
                 break;
@@ -226,7 +261,7 @@ public class TetrisGame {
         return well;
     }
 
-    public long getScore() {
+    public  long getScore() {
         return score;
     }
 }

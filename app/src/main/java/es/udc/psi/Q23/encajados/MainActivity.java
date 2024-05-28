@@ -8,20 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, GameOverDialogFragment.GameOverDialogListener {
 
     private TetrisGame tetrisGame;
     private TetrisDrawingThread tetrisThread;
-
     private TetrisView tetrisView;
-    Button butRL, butML, butRR, butMR, butDD, butExit ;
+    Button butRL, butML, butRR, butMR, butDD, butExit, butPause;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tetrisGame = new TetrisGame();
+        tetrisGame = new TetrisGame(this);
         tetrisView = findViewById(R.id.tetrisView);
 
         // Inicializar el hilo de dibujo del juego
@@ -29,57 +28,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tetrisThread.setRunning(true);
         tetrisThread.start();
 
-        // Botón para rotar la pieza hacia la izquierda
+        // Inicializar los botones y configurar los listeners
         butRL = findViewById(R.id.buttonRotateLeft);
         butRL.setOnClickListener(this);
 
-        // Botón para rotar la pieza hacia la derecha
         butRR = findViewById(R.id.buttonRotateRight);
         butRR.setOnClickListener(this);
 
-        // Botón para mover la pieza hacia la izquierda
         butML = findViewById(R.id.buttonMoveLeft);
         butML.setOnClickListener(this);
 
-        // Botón para mover la pieza hacia la derecha
         butMR = findViewById(R.id.buttonMoveRight);
         butMR.setOnClickListener(this);
 
-        // Botón para hacer caer la pieza
         butDD = findViewById(R.id.buttonDropDown);
         butDD.setOnClickListener(this);
 
-        // Botón para cerrar la partida
         butExit = findViewById(R.id.button_exit);
         butExit.setOnClickListener(this);
 
-
+        butPause = findViewById(R.id.button_pause);
+        butPause.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
-        if(v==butRL){
+        if (v == butRL) {
             tetrisGame.rotate(-1);
-        }else if(v==butRR) {
+        } else if (v == butRR) {
             tetrisGame.rotate(1);
-        }else if(v==butML) {
+        } else if (v == butML) {
             tetrisGame.move(-1);
-        }else if(v==butMR) {
+        } else if (v == butMR) {
             tetrisGame.move(1);
-        }else if(v==butDD) {
+        } else if (v == butDD) {
+            tetrisGame.extraPoint();
             tetrisGame.dropDown();
-        }else if(v==butExit) {
+        } else if (v == butExit) {
             Log.d("_TAG", "Boton exit");
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
             finish();
+        } else if (v == butPause) {
+            boolean isPaused = tetrisGame.isPaused();
+            tetrisGame.setPaused(!isPaused);
         }
     }
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Detener el hilo de dibujo del juego al cerrar la aplicación
         tetrisThread.setRunning(false);
         boolean retry = true;
         while (retry) {
@@ -90,5 +88,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onRetry() {
+        tetrisGame.retry();
+    }
+
+    @Override
+    public void onExit() {
+        finish();
+    }
+
+    public void showGameOverDialog(long score) {
+        GameOverDialogFragment dialog = new GameOverDialogFragment(score);
+        dialog.show(getSupportFragmentManager(), "GameOverDialogFragment");
     }
 }

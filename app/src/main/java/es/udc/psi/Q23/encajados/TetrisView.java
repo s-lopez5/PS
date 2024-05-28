@@ -13,7 +13,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback {
     public TetrisView(Context context, AttributeSet attrs) {
         super(context, attrs);
         getHolder().addCallback(this);
-        tetrisGame = new TetrisGame(); // Inicializa la lógica del juego
         paint = new Paint();
     }
 

@@ -25,19 +25,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-        <Button
-            android:id="@+id/buttonRotateLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/but_rleft" />
+            <Button
+                android:id="@+id/buttonRotateLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/but_rleft" />
 
-        <Button
-            android:id="@+id/buttonMoveLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text= "@string/but_mleft"/>
+            <Button
+                android:id="@+id/buttonMoveLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text= "@string/but_mleft"/>
         </LinearLayout>
 
         <Button
@@ -74,5 +74,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/but_salir" />
+    <Button
+        android:id="@+id/button_pause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/but_pausar" />
 
 </LinearLayout>
