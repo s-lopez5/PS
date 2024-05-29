@@ -10,4 +10,16 @@
     <string name="but_rright">RDroite</string>
     <string name="but_mright">MDroite</string>
     <string name="but_pausar">Pause</string>
+
+    <string name="str_menu_settings">Paramètres</string>
+
+    <string name="title_activity_settings">Paramètres</string>
+
+    <!-- Preference Titles -->
+    <string name="user_data_header">User Data</string>
+
+    <!-- Messages Preferences -->
+    <string name="user_title">Utilisateur</string>
+    <string name="score_title">Ponctuation</string>
+
 </resources>

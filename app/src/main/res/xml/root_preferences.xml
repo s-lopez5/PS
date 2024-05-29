@@ -1,0 +1,18 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/user_data_header">
+
+        <EditTextPreference
+            app:key="user"
+            app:title="@string/user_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="score"
+            app:title="@string/score_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

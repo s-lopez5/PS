@@ -10,4 +10,16 @@
     <string name="but_rright">RDer</string>
     <string name="but_mright">MDer</string>
     <string name="but_pausar">Pausar</string>
+
+    <string name="str_menu_settings">Opciones</string>
+
+    <string name="title_activity_settings">Opciones</string>
+
+    <!-- Preference Titles -->
+    <string name="user_data_header">Datos de Usuario</string>
+
+    <!-- Messages Preferences -->
+    <string name="user_title">Usuario</string>
+    <string name="score_title">Puntuacion</string>
+
 </resources>
