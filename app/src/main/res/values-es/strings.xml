@@ -27,4 +27,7 @@
     <string name="retry_message">Reintentar</string>
     <string name="exit_message">Salir</string>
 
+    <string name="pause_title">Pausa</string>
+    <string name="continue_message">Continuar</string>
+
 </resources>

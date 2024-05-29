@@ -134,6 +134,11 @@ public class TetrisGame {
 
     public void setPaused(boolean paused) {
         isPaused = paused;
+        if (isPaused) {
+            if (context instanceof MainActivity) {
+                ((MainActivity) context).showPauseDialog(score);
+            }
+        }
     }
 
     public boolean isOver(){return isOver;}

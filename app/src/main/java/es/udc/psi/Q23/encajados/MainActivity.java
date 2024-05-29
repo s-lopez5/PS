@@ -8,12 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, GameOverDialogFragment.GameOverDialogListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, GameOverDialogFragment.GameOverDialogListener, PauseDialogFragment.PauseDialogListener {
 
     private TetrisGame tetrisGame;
     private TetrisDrawingThread tetrisThread;
     private TetrisView tetrisView;
     Button butRL, butML, butRR, butMR, butDD, butExit, butPause;
+
+    final private String gameOverTag = "GameOverDialogFragment";
+    final private String pauseTag = "PauseDialogFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setResult(RESULT_OK, intent);
             finish();
         } else if (v == butPause) {
-            boolean isPaused = tetrisGame.isPaused();
-            tetrisGame.setPaused(!isPaused);
+            if (!tetrisGame.isPaused()) {
+                tetrisGame.setPaused(true);
+            }
         }
     }
 
@@ -96,12 +100,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void onContinue(){
+        if (tetrisGame.isPaused()) {
+            tetrisGame.setPaused(false);
+        }
+    }
+
+    @Override
     public void onExit() {
         finish();
     }
 
     public void showGameOverDialog(long score) {
         GameOverDialogFragment dialog = new GameOverDialogFragment(score);
-        dialog.show(getSupportFragmentManager(), "GameOverDialogFragment");
+        dialog.show(getSupportFragmentManager(), gameOverTag);
+    }
+
+    public void showPauseDialog(long score) {
+        PauseDialogFragment dialog = new PauseDialogFragment(score);
+        dialog.show(getSupportFragmentManager(), pauseTag);
     }
 }
