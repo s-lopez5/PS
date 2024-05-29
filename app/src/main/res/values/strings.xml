@@ -21,4 +21,9 @@
     <string name="user_title">User</string>
     <string name="score_title">Score</string>
 
+    <string name="game_over_title">Game Over</string>
+    <string name="score_game_over_message">Your Score: </string>
+    <string name="retry_message">Retry</string>
+    <string name="exit_message">Exit</string>
+
 </resources>

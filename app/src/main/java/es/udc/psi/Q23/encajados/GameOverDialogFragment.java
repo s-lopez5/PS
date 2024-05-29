@@ -39,14 +39,14 @@ public class GameOverDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Game Over")
-                .setMessage("Your Score: " + finalScore)
-                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.game_over_title)
+                .setMessage(getString(R.string.score_game_over_message) + " " + finalScore)
+                .setPositiveButton(R.string.retry_message, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         listener.onRetry();
                     }
                 })
-                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.exit_message, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         listener.onExit();
                     }

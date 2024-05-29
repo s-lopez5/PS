@@ -22,4 +22,9 @@
     <string name="user_title">Usuario</string>
     <string name="score_title">Puntuacion</string>
 
+    <string name="game_over_title">Juego terminado</string>
+    <string name="score_game_over_message">Tu puntuación:</string>
+    <string name="retry_message">Reintentar</string>
+    <string name="exit_message">Salir</string>
+
 </resources>

@@ -22,4 +22,9 @@
     <string name="user_title">Utilisateur</string>
     <string name="score_title">Ponctuation</string>
 
+    <string name="game_over_title">Jeu terminé</string>
+    <string name="score_game_over_message">Ton score: </string>
+    <string name="retry_message">Recommencez</string>
+    <string name="exit_message">Sortie</string>
+
 </resources>
