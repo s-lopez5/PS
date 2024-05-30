@@ -1,4 +1,4 @@
-package es.udc.psi.Q23.encajados;
+package es.udc.psi.Q23.encajados.DialogFragment;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -6,30 +6,30 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
+import es.udc.psi.Q23.encajados.R;
 
-public class GameOverDialogFragment extends DialogFragment {
+public class PauseDialogFragment extends DialogFragment {
 
-    private long finalScore;
-    private GameOverDialogListener listener;
+    private long score;
+    private PauseDialogListener listener;
 
-    public interface GameOverDialogListener {
-        void onRetry();
-
+    public interface PauseDialogListener {
+        void onContinue();
         void onExit();
     }
 
-    public GameOverDialogFragment(long score) {
-        this.finalScore = score;
+    public PauseDialogFragment(long score) {
+        this.score = score;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (GameOverDialogListener) context;
+            listener = (PauseDialogListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement GameOverDialogListener");
@@ -40,11 +40,11 @@ public class GameOverDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.game_over_title)
-                .setMessage(getString(R.string.score_game_over_message) + " " + finalScore)
-                .setPositiveButton(R.string.retry_message, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.pause_title)
+                .setMessage(getString(R.string.score_game_over_message) + " " + score)
+                .setPositiveButton(R.string.continue_message, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        listener.onRetry();
+                        listener.onContinue();
                     }
                 })
                 .setNegativeButton(R.string.exit_message, new DialogInterface.OnClickListener() {
@@ -54,4 +54,5 @@ public class GameOverDialogFragment extends DialogFragment {
                 });
         return builder.create();
     }
+
 }

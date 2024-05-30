@@ -30,4 +30,7 @@
     <string name="pause_title">Pause</string>
     <string name="continue_message">Continuer</string>
 
+    <string name="edit_text_message">Utilisateur</string>
+    <string name="but_user_message">Modifier</string>
+
 </resources>

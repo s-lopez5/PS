@@ -29,4 +29,7 @@
     <string name="pause_title">Pause</string>
     <string name="continue_message">Continue</string>
 
+    <string name="edit_text_message">User</string>
+    <string name="but_user_message">Modify</string>
+
 </resources>
