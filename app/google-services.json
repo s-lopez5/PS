@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93832482307",
+    "project_id": "q23encajados",
+    "storage_bucket": "q23encajados.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93832482307:android:fb4465d55b6fceed5ac836",
+        "android_client_info": {
+          "package_name": "es.udc.psi.Q23.encajados"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw4F-Jueu1AInKG74LjM3g5tFSseTLf7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

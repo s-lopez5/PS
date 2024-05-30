@@ -12,16 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Encajados"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ScoreActivity"
+            android:exported="false"
+            android:parentActivityName=".MenuActivity"/>
+
         <activity
             android:name=".SettingsActivity"
-            android:parentActivityName=".MenuActivity"
             android:exported="false"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MenuActivity" />
 
         <activity
             android:name=".MainActivity"
-            android:parentActivityName=".MenuActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuActivity" />
 
         <activity
             android:name=".MenuActivity"

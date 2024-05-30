@@ -1,4 +1,4 @@
-package es.udc.psi.Q23.encajados;
+package es.udc.psi.Q23.encajados.TetrisImp;
 
 import android.content.Context;
 import android.graphics.Paint;

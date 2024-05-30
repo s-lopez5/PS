@@ -1,4 +1,4 @@
-package es.udc.psi.Q23.encajados;
+package es.udc.psi.Q23.encajados.TetrisImp;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,6 +7,8 @@ import android.graphics.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import es.udc.psi.Q23.encajados.MainActivity;
 
 public class TetrisGame {
     public static final Point[][][] Tetraminos = {

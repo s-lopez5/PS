@@ -1,14 +1,12 @@
-package es.udc.psi.Q23.encajados;
+package es.udc.psi.Q23.encajados.TetrisImp;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.view.SurfaceHolder;
-import android.widget.Toast;
+
+import es.udc.psi.Q23.encajados.TetrisImp.TetrisGame;
 
 public class TetrisDrawingThread extends Thread{
     private final SurfaceHolder surfaceHolder;

@@ -20,9 +20,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+
 import java.io.File;
 
 import es.udc.psi.Q23.encajados.database.DatabaseHelper;
+import es.udc.psi.Q23.encajados.database.FirebaseHelper;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     String TAG = "_TAG";
@@ -33,14 +36,19 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     String KEY_USER = "user";
     String KEY_SCORE = "score";
     DatabaseHelper dbHelper;
+    FirebaseHelper firebaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
         dbHelper = new DatabaseHelper(this);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        FirebaseApp.initializeApp(this);
+        firebaseHelper = new FirebaseHelper();
 
         but_inicio = findViewById(R.id.but_inicio);
         but_inicio.setOnClickListener(this);
@@ -66,15 +74,15 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(TAG, "Boton Iniciar");
             String userName = sharedPreferences.getString(KEY_USER, "");
 
-
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.putExtra(KEY_USER, userName);
             startActivityForResult(intent, 2);
 
         } else if (v == but_puntuacion) {
             Log.d(TAG, "Boton Puntuacion");
-            String log = "No estan implementadas todavia las puntuaciones.";
-            Toast.makeText(getApplicationContext(), log, Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+            startActivityForResult(intent, 2);
 
         } else if (v == but_user) {
             Log.d(TAG, "Boton Usuario");
@@ -83,12 +91,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
             String score = dbHelper.getHighestScore(user_data);
 
-
             SharedPreferences.Editor editor =  sharedPreferences.edit();
             editor.putString(KEY_USER, user_data);
             editor.putString(KEY_SCORE, score);
             editor.apply();
-
 
         } else if (v == but_salir) {
             Log.d(TAG, "Boton Salir");
@@ -97,7 +103,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <es.udc.psi.Q23.encajados.TetrisView
+    <es.udc.psi.Q23.encajados.TetrisImp.TetrisView
         android:id="@+id/tetrisView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
