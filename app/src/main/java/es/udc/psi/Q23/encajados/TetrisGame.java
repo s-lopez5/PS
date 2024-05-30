@@ -141,7 +141,6 @@ public class TetrisGame {
         }
     }
 
-    public boolean isOver(){return isOver;}
 
     public void setOver(boolean over) {
         isPaused = true;
@@ -196,6 +195,7 @@ public class TetrisGame {
             if ((pieceOrigin.y == 2)&&(p.y ==0) ) {
                 setOver(true);
                 if (context instanceof MainActivity) {
+                    ((MainActivity) context).pushScore(score);
                     ((MainActivity) context).showGameOverDialog(score);
                 }
                 return;

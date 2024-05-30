@@ -3,7 +3,9 @@ package es.udc.psi.Q23.encajados;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +13,18 @@ import android.widget.EditText;
 
 import es.udc.psi.Q23.encajados.DialogFragment.GameOverDialogFragment;
 import es.udc.psi.Q23.encajados.DialogFragment.PauseDialogFragment;
+import es.udc.psi.Q23.encajados.database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GameOverDialogFragment.GameOverDialogListener, PauseDialogFragment.PauseDialogListener {
 
     private TetrisGame tetrisGame;
     private TetrisDrawingThread tetrisThread;
     private TetrisView tetrisView;
+
+    String userName;
+    String KEY_SCORE = "score";
+
+    SharedPreferences sharedPreferences;
     Button butRL, butML, butRR, butMR, butDD, butExit, butPause;
 
     final private String gameOverTag = "GameOverDialogFragment";
@@ -29,6 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tetrisGame = new TetrisGame(this);
         tetrisView = findViewById(R.id.tetrisView);
+
+        // Recuperamos el user name
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("user");
+
+        //Recuperamos sharedPreferences para actualizarlo
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         // Inicializar el hilo de dibujo del juego
         tetrisThread = new TetrisDrawingThread(tetrisView.getHolder(), tetrisGame);
@@ -117,7 +132,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void showGameOverDialog(long score) {
         GameOverDialogFragment dialog = new GameOverDialogFragment(score);
-        dialog.show(getSupportFragmentManager(), gameOverTag);
+        dialog.show(getSupportFragmentManager(), "GameOverDialogFragment");
+
+    }
+
+    public void pushScore(long score){
+        // Guardamos la puntuación en la base de datos
+        DatabaseHelper db = new DatabaseHelper(this);
+        db.addScore(userName, (int) score);
+
+        SharedPreferences.Editor editor =  sharedPreferences.edit();
+        editor.putString(KEY_SCORE, String.valueOf((int)score));
+        editor.apply();
     }
 
     public void showPauseDialog(long score) {

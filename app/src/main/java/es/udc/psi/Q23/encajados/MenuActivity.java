@@ -7,6 +7,8 @@ import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import es.udc.psi.Q23.encajados.database.DatabaseHelper;
+
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     String TAG = "_TAG";
     Button but_inicio, but_puntuacion, but_salir, but_user;
@@ -28,11 +32,15 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences sharedPreferences;
     String KEY_USER = "user";
     String KEY_SCORE = "score";
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        dbHelper = new DatabaseHelper(this);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         but_inicio = findViewById(R.id.but_inicio);
         but_inicio.setOnClickListener(this);
@@ -41,6 +49,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         but_puntuacion.setOnClickListener(this);
 
         user_et = findViewById(R.id.user_edit_text);
+        user_et.setText(sharedPreferences.getString(KEY_USER, getString(R.string.edit_text_message)));
 
         but_user = findViewById(R.id.but_user);
         but_user.setOnClickListener(this);
@@ -48,15 +57,18 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         but_salir = findViewById(R.id.but_salir);
         but_salir.setOnClickListener(this);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
     }
 
     @Override
     public void onClick(View v) {
         if(v == but_inicio){
             Log.d(TAG, "Boton Iniciar");
+            String userName = sharedPreferences.getString(KEY_USER, "");
+
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra(KEY_USER, userName);
             startActivityForResult(intent, 2);
 
         } else if (v == but_puntuacion) {
@@ -69,8 +81,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
             String user_data = user_et.getText().toString();
 
+            String score = dbHelper.getHighestScore(user_data);
+
+
             SharedPreferences.Editor editor =  sharedPreferences.edit();
             editor.putString(KEY_USER, user_data);
+            editor.putString(KEY_SCORE, score);
             editor.apply();
 
 
@@ -81,6 +97,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
