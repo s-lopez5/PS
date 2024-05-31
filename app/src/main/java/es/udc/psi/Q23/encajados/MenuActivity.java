@@ -35,6 +35,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences sharedPreferences;
     String KEY_USER = "user";
     String KEY_SCORE = "score";
+
     DatabaseHelper dbHelper;
     FirebaseHelper firebaseHelper;
 
@@ -90,6 +91,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             String user_data = user_et.getText().toString();
 
             String score = dbHelper.getHighestScore(user_data);
+
+
 
             SharedPreferences.Editor editor =  sharedPreferences.edit();
             editor.putString(KEY_USER, user_data);

@@ -16,6 +16,7 @@ import es.udc.psi.Q23.encajados.TetrisImp.TetrisDrawingThread;
 import es.udc.psi.Q23.encajados.TetrisImp.TetrisGame;
 import es.udc.psi.Q23.encajados.TetrisImp.TetrisView;
 import es.udc.psi.Q23.encajados.database.DatabaseHelper;
+import es.udc.psi.Q23.encajados.database.FirebaseHelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GameOverDialogFragment.GameOverDialogListener, PauseDialogFragment.PauseDialogListener {
 
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String KEY_SCORE = "score";
 
     SharedPreferences sharedPreferences;
+    DatabaseHelper db;
+    FirebaseHelper firebaseHelper;
+
     Button butRL, butML, butRR, butMR, butDD, butExit, butPause;
 
     final private String gameOverTag = "GameOverDialogFragment";
@@ -134,18 +138,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void showGameOverDialog(long score) {
         GameOverDialogFragment dialog = new GameOverDialogFragment(score);
-        dialog.show(getSupportFragmentManager(), "GameOverDialogFragment");
+        dialog.show(getSupportFragmentManager(), gameOverTag);
 
     }
 
     public void pushScore(long score){
         // Guardamos la puntuación en la base de datos
-        DatabaseHelper db = new DatabaseHelper(this);
+        db = new DatabaseHelper(this);
         db.addScore(userName, (int) score);
+
+        firebaseHelper = new FirebaseHelper();
+        firebaseHelper.saveUserScore(userName, (int) score);
 
         SharedPreferences.Editor editor =  sharedPreferences.edit();
         editor.putString(KEY_SCORE, String.valueOf((int)score));
         editor.apply();
+
+
     }
 
     public void showPauseDialog(long score) {
