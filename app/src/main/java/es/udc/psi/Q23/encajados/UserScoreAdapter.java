@@ -31,7 +31,6 @@ public class UserScoreAdapter extends RecyclerView.Adapter<UserScoreAdapter.MyVi
         public void bind(UserScore userScore) {
             userName.setText(userScore.getUsername());
             score.setText( String.valueOf(userScore.getScore()));
-            Log.d("_TAG", "PETA");
 
         }
     }
