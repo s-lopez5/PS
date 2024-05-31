@@ -18,53 +18,67 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="4dp">
+
             <Button
                 android:id="@+id/buttonRotateLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/but_rleft" />
+                android:text="@string/but_rleft"
+                android:textSize="18sp"
+                android:padding="16dp" />
 
             <Button
                 android:id="@+id/buttonMoveLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text= "@string/but_mleft"/>
+                android:text= "@string/but_mleft"
+                android:textSize="18sp"
+                android:padding="16dp" />
         </LinearLayout>
 
         <Button
             android:id="@+id/buttonDropDown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="@string/but_ddown" />
+            android:text="@string/but_ddown"
+            android:textSize="18sp"
+            android:padding="16dp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="4dp">
 
             <Button
                 android:id="@+id/buttonRotateRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/but_rright" />
+                android:text="@string/but_rright"
+                android:textSize="18sp"
+                android:padding="16dp" />
             <Button
                 android:id="@+id/buttonMoveRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/but_mright" />
+                android:text="@string/but_mright"
+                android:textSize="18sp"
+                android:padding="16dp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -73,11 +87,15 @@
         android:id="@+id/button_exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/but_salir" />
+        android:text="@string/but_salir"
+        android:textSize="18sp"
+        android:padding="16dp" />
     <Button
         android:id="@+id/button_pause"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/but_pausar" />
+        android:text="@string/but_pausar"
+        android:textSize="18sp"
+        android:padding="16dp" />
 
 </LinearLayout>
