@@ -22,16 +22,12 @@ public class ScoreActivity extends AppCompatActivity {
     private UserScoreAdapter mAdapter;
     FirebaseHelper firebaseHelper;
 
-    List<UserScore> data = new ArrayList<>();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
         firebaseHelper = new FirebaseHelper();
-        //List<UserScore> data = firebaseHelper.getTop10Scores();
         firebaseHelper.getTop10Scores(new FirebaseHelper.UserScoresCallback() {
             @Override
             public void onCallback(List<UserScore> userScores) {

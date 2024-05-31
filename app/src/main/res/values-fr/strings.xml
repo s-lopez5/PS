@@ -32,5 +32,6 @@
 
     <string name="edit_text_message">Utilisateur</string>
     <string name="but_user_message">Modifier</string>
+    <string name="top_scores">Top Scores</string>
 
 </resources>
